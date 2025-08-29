@@ -5,6 +5,10 @@
 [[plugins]]
   package = "@netlify/plugin-nextjs"
 
+[functions]
+  node_bundler = "esbuild"
+  included_files = [".next/**"]
+
 [build.environment]
   NEXT_TELEMETRY_DISABLED = "1"
 
