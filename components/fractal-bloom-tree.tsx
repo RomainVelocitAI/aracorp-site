@@ -1,22 +1,23 @@
 "use client";
 
 import React, { useEffect, useRef } from 'react';
-import { motion } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
 import { ArrowRight, GitBranch } from 'lucide-react';
 
 // A utility function for class names
-const cn = (...classes) => classes.filter(Boolean).join(' ');
+const cn = (...classes: string[]) => classes.filter(Boolean).join(' ');
 
 // Fractal Bloom Canvas Component
 const FractalBloomCanvas = () => {
-    const canvasRef = useRef(null);
+    const canvasRef = useRef<HTMLCanvasElement>(null);
 
     useEffect(() => {
         const canvas = canvasRef.current;
         if (!canvas) return;
 
         const ctx = canvas.getContext('2d');
-        let animationFrameId;
+        if (!ctx) return;
+        let animationFrameId: number;
         const mouse = { x: window.innerWidth / 2, y: window.innerHeight };
         let currentDepth = 0;
         const maxDepth = 9;
@@ -26,7 +27,7 @@ const FractalBloomCanvas = () => {
             canvas.height = window.innerHeight;
         };
 
-        const drawBranch = (x, y, angle, length, depth) => {
+        const drawBranch = (x: number, y: number, angle: number, length: number, depth: number) => {
             if (depth > currentDepth) return;
             
             ctx.beginPath();
@@ -68,7 +69,7 @@ const FractalBloomCanvas = () => {
             animationFrameId = requestAnimationFrame(animate);
         };
 
-        const handleMouseMove = (event) => {
+        const handleMouseMove = (event: MouseEvent) => {
             mouse.x = event.clientX;
             mouse.y = event.clientY;
         };
@@ -92,15 +93,15 @@ const FractalBloomCanvas = () => {
 
 // The main hero component
 const FractalBloomHero = () => {
-    const fadeUpVariants = {
+    const fadeUpVariants: Variants = {
         hidden: { opacity: 0, y: 20 },
-        visible: (i) => ({
+        visible: (i: number) => ({
             opacity: 1,
             y: 0,
             transition: {
                 delay: i * 0.2 + 1.5, // Delay for fractal to grow
                 duration: 0.8,
-                ease: "easeInOut",
+                ease: "easeInOut" as const,
             },
         }),
     };
@@ -116,12 +117,19 @@ const FractalBloomHero = () => {
             {/* Overlay HTML Content */}
             <div className="relative z-20 text-center p-6">
 
-                <motion.h1
-                    custom={1} variants={fadeUpVariants} initial="hidden" animate="visible"
-                    className="text-5xl md:text-7xl font-bold tracking-tighter mb-6 bg-clip-text text-transparent bg-gradient-to-b from-white to-gray-400"
+                <motion.div
+                    custom={1} 
+                    variants={fadeUpVariants} 
+                    initial="hidden" 
+                    animate="visible"
+                    className="mb-8"
                 >
-                    ARACORP
-                </motion.h1>
+                    <img 
+                        src="/logo-aracorp.png" 
+                        alt="ARACORP Logo" 
+                        className="h-24 md:h-32 mx-auto filter drop-shadow-2xl"
+                    />
+                </motion.div>
 
                 <motion.p
                     custom={2} variants={fadeUpVariants} initial="hidden" animate="visible"
