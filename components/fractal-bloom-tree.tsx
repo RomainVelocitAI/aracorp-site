@@ -133,9 +133,9 @@ const FractalBloomHero = () => {
 
                 <motion.p
                     custom={2} variants={fadeUpVariants} initial="hidden" animate="visible"
-                    className="max-w-2xl mx-auto text-lg text-gray-400 mb-10"
+                    className="max-w-2xl mx-auto text-lg text-gray-200 mb-10"
                 >
-                    Un écosystème dédié à la croissance de votre entreprise, couvrant tous les leviers de croissance.
+                    Un écosystème digital complet pour accélérer et pérenniser votre développement.
                 </motion.p>
 
                 <motion.div
