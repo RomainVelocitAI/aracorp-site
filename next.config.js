@@ -4,7 +4,14 @@ const nextConfig = {
   output: 'standalone',
   images: {
     formats: ['image/avif', 'image/webp'],
-    unoptimized: true
+    unoptimized: true,
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+        pathname: '/**',
+      },
+    ],
   },
 }
 

@@ -39,8 +39,8 @@ const FractalBloomCanvas = () => {
             ctx.lineTo(endX, endY);
             
             const opacity = 1 - (depth / maxDepth);
-            ctx.strokeStyle = `rgba(255, 255, 255, ${opacity * 0.8})`;
-            ctx.lineWidth = 1 - (depth / maxDepth) * 0.5;
+            ctx.strokeStyle = `rgba(59, 130, 246, ${opacity * 0.9})`; // Bleu
+            ctx.lineWidth = 2 - (depth / maxDepth) * 1.5;
             ctx.stroke();
 
             // Mouse influence on branching angle
@@ -53,7 +53,7 @@ const FractalBloomCanvas = () => {
         };
 
         const animate = () => {
-            ctx.fillStyle = 'rgba(2, 6, 23, 0.2)'; // Fading effect
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.1)'; // Fond blanc avec fading
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
             const startX = canvas.width / 2;
@@ -87,7 +87,7 @@ const FractalBloomCanvas = () => {
         };
     }, []);
 
-    return <canvas ref={canvasRef} className="absolute inset-0 z-0 w-full h-full bg-[#020617]" />;
+    return <canvas ref={canvasRef} className="absolute inset-0 z-0 w-full h-full bg-white" />;
 };
 
 
@@ -112,7 +112,7 @@ const FractalBloomHero = () => {
         >
             <FractalBloomCanvas />
             
-            <div className="absolute inset-0 bg-gradient-to-t from-[#020617] via-transparent to-transparent z-10"></div>
+            <div className="absolute inset-0 bg-gradient-to-t from-white/80 via-transparent to-transparent z-10"></div>
 
             {/* Overlay HTML Content */}
             <div className="relative z-20 text-center p-6">
@@ -133,7 +133,7 @@ const FractalBloomHero = () => {
 
                 <motion.p
                     custom={2} variants={fadeUpVariants} initial="hidden" animate="visible"
-                    className="max-w-2xl mx-auto text-lg text-gray-200 mb-10"
+                    className="max-w-2xl mx-auto text-lg text-gray-700 mb-10"
                 >
                     Un écosystème digital complet pour accélérer et pérenniser votre développement.
                 </motion.p>
@@ -141,7 +141,7 @@ const FractalBloomHero = () => {
                 <motion.div
                     custom={3} variants={fadeUpVariants} initial="hidden" animate="visible"
                 >
-                    <button className="px-8 py-4 bg-white text-black font-semibold rounded-lg shadow-lg hover:bg-gray-200 transition-colors duration-300 flex items-center gap-2 mx-auto">
+                    <button className="px-8 py-4 bg-gradient-to-r from-blue-600 to-cyan-600 text-white font-semibold rounded-lg shadow-lg hover:from-blue-700 hover:to-cyan-700 transition-all duration-300 flex items-center gap-2 mx-auto">
                         Débuter votre croissance
                         <ArrowRight className="h-5 w-5" />
                     </button>
