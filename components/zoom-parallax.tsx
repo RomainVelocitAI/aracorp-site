@@ -47,6 +47,10 @@ export function ZoomParallax({ images }: ZoomParallaxProps) {
 											<h2 className="text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-400">
 												RUNCALL
 											</h2>
+										) : alt?.includes('Automat-X') ? (
+											<h2 className="text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-violet-600 to-pink-500">
+												AUTOMAT-X
+											</h2>
 										) : (
 											<h2 className="text-7xl font-black text-transparent bg-clip-text bg-gradient-to-br from-[#2BA8B5] via-[#D97652] to-[#A73A50]">
 												DIGIQO
