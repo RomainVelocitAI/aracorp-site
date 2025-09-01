@@ -64,12 +64,11 @@ export default function SubsidiariesCarousel() {
   }, [carouselApi]);
 
   return (
-    <section className="py-32 bg-background">
+    <section id="carousel" className="py-32 bg-background">
       <div className="container mx-auto px-6">
         <div className="mb-8 flex flex-col justify-between md:mb-14 md:flex-row md:items-end lg:mb-16">
           <div className="max-w-2xl">
             <h3 className="text-lg sm:text-xl lg:text-3xl font-medium text-gray-900 dark:text-white leading-relaxed">
-              Nos Filiales{" "}
               <span className="text-gray-500 dark:text-gray-400 text-sm sm:text-base lg:text-3xl">
                 La synergie ARACORP : trois expertises complémentaires pour accélérer votre transformation digitale complète.
               </span>

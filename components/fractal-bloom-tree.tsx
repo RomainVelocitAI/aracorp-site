@@ -108,6 +108,7 @@ const FractalBloomHero = () => {
 
     return (
         <div 
+            id="hero"
             className="relative h-screen w-full flex flex-col items-center justify-center overflow-hidden"
         >
             <FractalBloomCanvas />
