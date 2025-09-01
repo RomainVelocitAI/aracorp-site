@@ -170,7 +170,7 @@ const ProblemSection = () => {
       x: 0,
       transition: {
         duration: 0.6,
-        ease: "easeOut",
+        ease: "easeOut" as const,
       },
     },
   };
@@ -186,23 +186,23 @@ const ProblemSection = () => {
   const getCheckboxColor = (solution: string, checked: boolean) => {
     if (!checked) return 'border-gray-500 group-hover:border-gray-400';
     
-    const colors = {
+    const colors: Record<string, string> = {
       'digiqo': 'bg-blue-500 border-blue-500',
       'automat-x': 'bg-purple-500 border-purple-500',
       'runcall': 'bg-green-500 border-green-500'
     };
-    return colors[solution];
+    return colors[solution] || 'border-gray-500';
   };
 
   const getTextColor = (solution: string, checked: boolean) => {
     if (!checked) return 'text-gray-300';
     
-    const colors = {
+    const colors: Record<string, string> = {
       'digiqo': 'text-blue-300',
       'automat-x': 'text-purple-300',
       'runcall': 'text-green-300'
     };
-    return colors[solution];
+    return colors[solution] || 'text-gray-300';
   };
 
   return (

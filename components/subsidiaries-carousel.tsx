@@ -9,7 +9,6 @@ import {
   CarouselContent,
   CarouselItem,
 } from "@/components/ui/carousel";
-import type { CarouselApi } from "@/components/ui/carousel";
 import Image from "next/image";
 
 interface SubsidiaryItem {
@@ -21,9 +20,7 @@ interface SubsidiaryItem {
 }
 
 export default function SubsidiariesCarousel() {
-  const [carouselApi, setCarouselApi] = useState<CarouselApi>();
-  const [canScrollPrev, setCanScrollPrev] = useState(false);
-  const [canScrollNext, setCanScrollNext] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   const items: SubsidiaryItem[] = [
     {
@@ -49,19 +46,6 @@ export default function SubsidiariesCarousel() {
     },
   ];
 
-  // Carousel scroll tracking
-  useEffect(() => {
-    if (!carouselApi) return;
-    const update = () => {
-      setCanScrollPrev(carouselApi.canScrollPrev());
-      setCanScrollNext(carouselApi.canScrollNext());
-    };
-    update();
-    carouselApi.on("select", update);
-    return () => {
-      carouselApi.off("select", update);
-    };
-  }, [carouselApi]);
 
   return (
     <section id="carousel" className="py-32 bg-background">
@@ -75,36 +59,14 @@ export default function SubsidiariesCarousel() {
             </h3>
           </div>
           <div className="flex gap-2 mt-4 md:mt-0">
-            <Button
-              variant="outline"
-              size="icon"
-              onClick={() => carouselApi?.scrollPrev()}
-              disabled={!canScrollPrev}
-              className="h-10 w-10 rounded-full"
-            >
-              <ChevronLeft className="h-4 w-4" />
-            </Button>
-            <Button
-              variant="outline"
-              size="icon"
-              onClick={() => carouselApi?.scrollNext()}
-              disabled={!canScrollNext}
-              className="h-10 w-10 rounded-full"
-            >
-              <ChevronRight className="h-4 w-4" />
-            </Button>
           </div>
         </div>
 
         <div className="w-full max-w-full">
           <Carousel
-            setApi={setCarouselApi}
-            opts={{ 
-              breakpoints: { "(max-width: 768px)": { dragFree: true } },
-              loop: true,
-              align: "start"
-            }}
             className="relative w-full max-w-full"
+            initialIndex={currentIndex}
+            onIndexChange={setCurrentIndex}
           >
             <CarouselContent className="hide-scrollbar w-full max-w-full md:ml-4 md:-mr-4">
               {items.map((item) => (
