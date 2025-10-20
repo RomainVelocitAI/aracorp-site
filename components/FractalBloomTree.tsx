@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useEffect, useRef } from 'react';
-import { motion } from 'framer-motion';
 
 const FractalBloomTree = () => {
     const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -38,10 +37,9 @@ const FractalBloomTree = () => {
             
             ctx.lineTo(endX, endY);
             
-            // Dynamic color based on depth and time
-            const hue = (depth * 30 + time * 2) % 360;
+            // White color with opacity based on depth
             const opacity = 1 - (depth / maxDepth) * 0.5;
-            ctx.strokeStyle = `hsla(${hue}, 70%, 60%, ${opacity})`;
+            ctx.strokeStyle = `rgba(255, 255, 255, ${opacity})`;
             ctx.lineWidth = Math.max(1, 4 - depth * 0.4);
             ctx.stroke();
 
@@ -69,29 +67,29 @@ const FractalBloomTree = () => {
         };
 
         const animate = () => {
-            ctx.fillStyle = 'rgba(10, 33, 192, 0.05)'; // Primary color with transparency
+            ctx.fillStyle = 'rgba(3, 34, 63, 0.05)'; // Background color #03223f with transparency
             ctx.fillRect(0, 0, canvas.width, canvas.height);
-            
+
             time += 0.5;
-            
+
             // Gradually increase depth for bloom effect
             if (currentDepth < maxDepth) {
                 currentDepth += 0.1;
             }
-            
+
             // Draw multiple trees from bottom
             const baseY = canvas.height - 50;
             const treeCount = 5;
             const spacing = canvas.width / (treeCount + 1);
-            
+
             for (let i = 1; i <= treeCount; i++) {
                 const x = spacing * i;
                 const baseAngle = -Math.PI / 2 + Math.sin(time * 0.01 + i) * 0.1;
                 const baseLength = 100 + Math.sin(time * 0.02 + i * 2) * 20;
-                
+
                 drawBranch(x, baseY, baseAngle, baseLength, 0);
             }
-            
+
             animationFrameId = requestAnimationFrame(animate);
         };
 
@@ -114,7 +112,7 @@ const FractalBloomTree = () => {
         <canvas
             ref={canvasRef}
             className="absolute inset-0 w-full h-full"
-            style={{ background: 'linear-gradient(to bottom, #0A21C0, #001050)' }}
+            style={{ background: '#03223f' }}
         />
     );
 };

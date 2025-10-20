@@ -51,7 +51,7 @@ const sections: SectionInfo[] = [
     emoji: "📞",
     tooltip: "Closing téléphonique expert",
     prefilledMessage: "Comment RunCall peut augmenter mes ventes ?",
-    botResponse: "RunCall révolutionne votre closing téléphonique ! 📞\n\n💰 **15% de taux de conversion** en moyenne\n⚡ **Réactivité maximale** : rappel en moins de 30 secondes\n🎯 **Scripts personnalisés** adaptés à votre secteur\n📊 **Reporting détaillé** en temps réel\n\nCalculez votre ROI potentiel avec notre simulateur ou demandez une démo gratuite !"
+    botResponse: "RunCall révolutionne votre closing téléphonique ! 📞\n\n💰 **15% de taux de conversion** en moyenne\n⚡ **Réactivité maximale** : rappel immédiat\n🎯 **Scripts personnalisés** adaptés à votre secteur\n📊 **Reporting détaillé** en temps réel\n\nCalculez votre ROI potentiel avec notre simulateur ou demandez une démo gratuite !"
   },
   {
     id: "automat-x",

@@ -38,11 +38,11 @@ export default function SubsidiariesCarousel() {
       image: "/images/runcall-screenshot.png",
     },
     {
-      id: "automatx",
-      title: "Automat-X",
-      summary: "L'intelligence artificielle au service de votre entreprise. Automatisation des processus, chatbots intelligents et solutions IA sur mesure.",
-      url: "#",
-      image: "/images/automatix.png",
+      id: "velocitai",
+      title: "VelocitAI",
+      summary: "Écosystème d'Agents IA pour Diriger avec Croissance. Nos agents IA spécialisés libèrent 25h par semaine à votre équipe et font tourner votre entreprise 24h/24.",
+      url: "https://velocit-ai.fr",
+      image: "/images/velocitai-screenshot.png",
     },
   ];
 

@@ -39,7 +39,7 @@ const FractalBloomCanvas = () => {
             ctx.lineTo(endX, endY);
             
             const opacity = 1 - (depth / maxDepth);
-            ctx.strokeStyle = `rgba(59, 130, 246, ${opacity * 0.9})`; // Bleu
+            ctx.strokeStyle = `rgba(255, 255, 255, ${opacity * 0.9})`; // Blanc
             ctx.lineWidth = 2 - (depth / maxDepth) * 1.5;
             ctx.stroke();
 
@@ -53,19 +53,19 @@ const FractalBloomCanvas = () => {
         };
 
         const animate = () => {
-            ctx.fillStyle = 'rgba(255, 255, 255, 0.1)'; // Fond blanc avec fading
+            ctx.fillStyle = 'rgba(3, 34, 63, 0.1)'; // Background color #03223f with fading
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
             const startX = canvas.width / 2;
             const startY = canvas.height;
             const startLength = canvas.height / 5;
-            
+
             drawBranch(startX, startY, -Math.PI / 2, startLength, 0);
 
             if (currentDepth < maxDepth) {
                 currentDepth += 0.03;
             }
-            
+
             animationFrameId = requestAnimationFrame(animate);
         };
 
@@ -87,7 +87,7 @@ const FractalBloomCanvas = () => {
         };
     }, []);
 
-    return <canvas ref={canvasRef} className="absolute inset-0 z-0 w-full h-full bg-white" />;
+    return <canvas ref={canvasRef} className="absolute inset-0 z-0 w-full h-full" style={{ background: '#03223f' }} />;
 };
 
 
@@ -134,7 +134,7 @@ const FractalBloomHero = () => {
 
                 <motion.p
                     custom={2} variants={fadeUpVariants} initial="hidden" animate="visible"
-                    className="max-w-2xl mx-auto text-lg text-gray-700 mb-10"
+                    className="max-w-2xl mx-auto text-lg text-white mb-10"
                 >
                     Un écosystème digital complet pour accélérer et pérenniser votre développement.
                 </motion.p>

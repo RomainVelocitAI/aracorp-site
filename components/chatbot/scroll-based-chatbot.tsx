@@ -60,7 +60,7 @@ const sections: SectionInfo[] = [
     emoji: "📞",
     tooltip: "Closing téléphonique expert",
     prefilledMessage: "Comment RunCall peut augmenter mes ventes ?",
-    botResponse: "RunCall révolutionne votre closing téléphonique ! 📞\n\n💰 **15% de taux de conversion** en moyenne\n⚡ **Réactivité maximale** : rappel en moins de 30 secondes\n🎯 **Scripts personnalisés** adaptés à votre secteur\n📊 **Reporting détaillé** en temps réel\n\nCalculez votre ROI potentiel avec notre simulateur ou demandez une démo gratuite !",
+    botResponse: "RunCall révolutionne votre closing téléphonique ! 📞\n\n💰 **15% de taux de conversion** en moyenne\n⚡ **Réactivité maximale**\n🎯 **Scripts personnalisés** adaptés à votre secteur\n📊 **Reporting détaillé** en temps réel\n\nCalculez votre ROI potentiel avec notre simulateur ou demandez une démo gratuite !",
     scrollStart: 65,
     scrollEnd: 100
   }
@@ -211,7 +211,7 @@ function ScrollBasedChatbotComponent() {
 
     setTimeout(() => {
       let response = "Merci pour votre message ! Notre équipe vous contactera rapidement. 📞";
-      
+
       if (userInput.includes("digiqo") || userInput.includes("site") || userInput.includes("marketing")) {
         response = sections.find(s => s.id === "digiqo-section")?.botResponse || response;
       } else if (userInput.includes("runcall") || userInput.includes("appel") || userInput.includes("vente")) {
@@ -219,10 +219,45 @@ function ScrollBasedChatbotComponent() {
       } else if (userInput.includes("prix") || userInput.includes("tarif")) {
         response = "Nos tarifs sont personnalisés selon vos besoins ! 💰\n\n📊 Demandez un devis gratuit\n📞 Consultation offerte de 30 minutes\n🎯 Solutions adaptées à votre budget";
       }
-      
+
       addBotMessage(response);
       setIsTyping(false);
     }, 1500);
+  };
+
+  const handleQuickAction = (action: { label: string; icon: string; scrollTo?: string }) => {
+    // Ajouter le message utilisateur
+    addUserMessage(action.label);
+
+    // Montrer que le bot tape
+    setIsTyping(true);
+
+    // Trouver la section correspondante
+    const targetSection = action.scrollTo
+      ? sections.find(s => s.id === action.scrollTo)
+      : currentSection;
+
+    setTimeout(() => {
+      // Ajouter la réponse du bot
+      if (targetSection) {
+        addBotMessage(targetSection.botResponse);
+      }
+      setIsTyping(false);
+
+      // Faire défiler vers la section si spécifié
+      if (action.scrollTo && targetSection) {
+        const scrollTarget = (targetSection.scrollStart + targetSection.scrollEnd) / 2;
+        const windowHeight = window.innerHeight;
+        const documentHeight = document.documentElement.scrollHeight;
+        const maxScroll = documentHeight - windowHeight;
+        const targetScroll = (scrollTarget / 100) * maxScroll;
+
+        window.scrollTo({
+          top: targetScroll,
+          behavior: 'smooth'
+        });
+      }
+    }, 800);
   };
 
   // Calculate chatbot vertical position
@@ -497,45 +532,48 @@ function ScrollBasedChatbotComponent() {
             )}
           </div>
 
-          {/* Input */}
+          {/* Quick Actions Buttons */}
           <div style={{
             padding: '16px',
             borderTop: '1px solid #e5e7eb',
             display: 'flex',
+            flexDirection: 'column',
             gap: '8px'
           }}>
-            <input
-              type="text"
-              value={inputValue}
-              onChange={(e) => setInputValue(e.target.value)}
-              onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
-              placeholder={`Question sur ${currentSection.name}...`}
-              style={{
-                flex: 1,
-                padding: '10px 14px',
-                borderRadius: '24px',
-                border: '1px solid #e5e7eb',
-                outline: 'none',
-                fontSize: '14px'
-              }}
-            />
-            <button
-              onClick={handleSendMessage}
-              style={{
-                width: '40px',
-                height: '40px',
-                borderRadius: '50%',
-                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-                border: 'none',
-                color: 'white',
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center'
-              }}
-            >
-              <Send size={18} />
-            </button>
+            <div style={{ fontSize: '12px', color: '#6b7280', marginBottom: '4px' }}>
+              Sélectionnez une option :
+            </div>
+            {currentSection.quickActions?.map((action, index) => (
+              <button
+                key={index}
+                onClick={() => handleQuickAction(action)}
+                style={{
+                  padding: '10px 14px',
+                  borderRadius: '12px',
+                  border: '1px solid #e5e7eb',
+                  background: 'white',
+                  color: '#374151',
+                  cursor: 'pointer',
+                  fontSize: '14px',
+                  textAlign: 'left',
+                  transition: 'all 0.2s',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '8px'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = '#f9fafb';
+                  e.currentTarget.style.borderColor = '#667eea';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = 'white';
+                  e.currentTarget.style.borderColor = '#e5e7eb';
+                }}
+              >
+                <span style={{ fontSize: '16px' }}>{action.icon}</span>
+                <span>{action.label}</span>
+              </button>
+            ))}
           </div>
         </div>
       )}
