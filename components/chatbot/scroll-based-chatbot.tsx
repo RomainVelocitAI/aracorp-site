@@ -532,49 +532,6 @@ function ScrollBasedChatbotComponent() {
             )}
           </div>
 
-          {/* Quick Actions Buttons */}
-          <div style={{
-            padding: '16px',
-            borderTop: '1px solid #e5e7eb',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '8px'
-          }}>
-            <div style={{ fontSize: '12px', color: '#6b7280', marginBottom: '4px' }}>
-              Sélectionnez une option :
-            </div>
-            {currentSection.quickActions?.map((action, index) => (
-              <button
-                key={index}
-                onClick={() => handleQuickAction(action)}
-                style={{
-                  padding: '10px 14px',
-                  borderRadius: '12px',
-                  border: '1px solid #e5e7eb',
-                  background: 'white',
-                  color: '#374151',
-                  cursor: 'pointer',
-                  fontSize: '14px',
-                  textAlign: 'left',
-                  transition: 'all 0.2s',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '8px'
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.background = '#f9fafb';
-                  e.currentTarget.style.borderColor = '#667eea';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.background = 'white';
-                  e.currentTarget.style.borderColor = '#e5e7eb';
-                }}
-              >
-                <span style={{ fontSize: '16px' }}>{action.icon}</span>
-                <span>{action.label}</span>
-              </button>
-            ))}
-          </div>
         </div>
       )}
 
